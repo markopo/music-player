@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <style>
+        html, body {
+            width: 100%;
+            overflow: hidden;
+            scroll-behavior: smooth;
+            font-family: "Avenir", Verdana, sans-serif;
+            font-size: 11px;
+        }
+
+        header {
+            width: 100%;
+            padding: .5rem;
+            background: #222222;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0 1rem;
+        }
+
+        .song-info {
+            font-weight: bold;
+            padding: .5rem;
+            border: 1px solid #333;
+        }
+
+        .song-info-list {
+            margin: 0;
+            padding: 0;
+            height: 100px;
+            overflow-y: scroll;
+        }
+
+        .song-info-list li {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Music Player</h1>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="three columns">
+                <button class="button amplitude-play-pause">Play / Pause</button>
+            </div>
+            <div class="two columns">
+                <button class="button amplitude-stop">Stop</button>
+            </div>
+            <div class="two columns">
+                <button class="button amplitude-mute">Mute</button>
+            </div>
+            <div class="two columns">
+                <button class="button amplitude-volume-up">Up&nbsp;&nbsp;</button>
+            </div>
+            <div class="two columns">
+                <button class="button amplitude-volume-down">Down</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two columns">
+                <button class="button amplitude-prev">prev</button>
+            </div>
+            <div class="two columns">
+                <button class="button amplitude-next">Next</button>
+            </div>
+            <div class="three columns">
+              <div style="margin-left: .5rem">
+                  <div style="font-size:11px;">
+                      <span>Current:</span>
+                      <span class="amplitude-current-minutes"></span>:<span class="amplitude-current-seconds"></span>
+                  </div>
+                  <div style="font-size:11px;">
+                      <span>Duration:</span>
+                      <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
+                  </div>
+              </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="ten columns">
+                <div style="padding: 1rem 0;">
+                    <input style="width:100%;" type="range" class="amplitude-volume-slider"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ten columns">
+                <div style="padding: 1rem 0;">
+                    <progress style="width:100%;" class="amplitude-song-played-progress"></progress>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="six columns">
+                <ol class="song-info-list">
+                </ol>
+            </div>
+            <div class="five columns">
+              <div class="song-info">
+                  <div data-amplitude-song-info="name"></div>
+                  <div data-amplitude-song-info="album"></div>
+                  <div data-amplitude-song-info="artist"></div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="./node_modules/amplitudejs/dist/amplitude.js"></script>
+    <script src="js/player.js"></script>
+    <script>
+        const allSongs = Amplitude.getSongs();
+        const songInfoList = document.querySelector('.song-info-list');
+        songInfoList.innerHTML = allSongs.map(x => `<li>${x.name}</li>`).join('');
+    </script>
+</body>
+</html>
